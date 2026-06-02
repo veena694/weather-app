@@ -1,61 +1,86 @@
-@import url(https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css);
-
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
+/* Custom Grid mesh background */
+.mesh-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 95%);
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Ambient dynamic backlights */
+.ambient-glow {
+  filter: blur(140px);
+  opacity: 0.45;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transition: background-color 1s ease, transform 1s ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Custom Cursor Glow */
+.cursor-trail {
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: width 0.3s ease, height 0.3s ease, background 0.5s ease;
 }
 
-.App-link {
-  color: #61dafb;
+/* Typewriter blinker cursor */
+@keyframes blink {
+  50% { border-color: transparent; }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.typewriter-cursor {
+  border-right: 2px solid rgb(99, 102, 241);
+  animation: blink 0.75s step-end infinite;
 }
 
-
-.app{
-  padding: 10vh 20%;
-  height: 100vh;
+/* 3D card perspective wrapper */
+.perspective-container {
+  perspective: 1000px;
 }
 
-.table-custom{
-  text-align: center;
+/* Custom volume-slider or glow-ring pulses */
+@keyframes sonarPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.4; }
+  100% { transform: scale(1.3); opacity: 0; }
 }
 
-.dark{
-  color: white;
-  background-color: black;
+.sonar-ring {
+  position: absolute;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: 50%;
+  animation: sonarPulse 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
+/* Custom range inputs */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
 
-.my-heading{
-  margin-bottom: 5vh;
+input[type="range"]::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.1);
+  height: 4px;
+  border-radius: 99px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #6366f1;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  margin-top: -4px;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
 }
